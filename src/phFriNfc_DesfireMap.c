@@ -1182,7 +1182,7 @@ NFCSTATUS phFriNfc_Desfire_SelectFile (phFriNfc_NdefMap_t  *NdefMap)
         }
 #endif /* #ifdef DESFIRE_EV1 */
 
-        if ( (NdefMap->DespOpFlag == PH_FRINFC_NDEFMAP_DESF_NDEF_CHK_OP))
+        if (NdefMap->DespOpFlag == PH_FRINFC_NDEFMAP_DESF_NDEF_CHK_OP)
 
         {
             /* cap container file identifier*/

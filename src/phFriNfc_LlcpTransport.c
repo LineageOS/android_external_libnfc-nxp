@@ -1804,7 +1804,6 @@ NFCSTATUS phFriNfc_LlcpTransport_Connect( phFriNfc_LlcpTransport_Socket_t*      
 {
    NFCSTATUS status = NFCSTATUS_SUCCESS;
    uint8_t nLocalSap;
-   uint8_t i;
 
    /* Check for NULL pointers */
    if(pLlcpSocket == NULL || pConnect_RspCb == NULL || pContext == NULL)
@@ -1894,7 +1893,6 @@ NFCSTATUS phFriNfc_LlcpTransport_ConnectByUri(phFriNfc_LlcpTransport_Socket_t*  
                                               void*                                      pContext)
 {
    NFCSTATUS status = NFCSTATUS_SUCCESS;
-   uint8_t i;
    uint8_t nLocalSap;
 
    /* Check for NULL pointers */

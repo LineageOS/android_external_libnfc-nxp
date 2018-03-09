@@ -1813,7 +1813,7 @@ phFriNfc_Tpz_H_NxpRead (
     /* Depending on the jewel command, the send length is decided */
 #ifdef TOPAZ_RAW_SUPPORT
 
-    psNdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+    psNdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
     /* " send_index " is incremented because already received buffer is filled with 
         TOPAZ command */
     send_index = (uint8_t)(send_index + 1);
@@ -1967,7 +1967,7 @@ phFriNfc_Tpz_H_NxpWrite(
     /* " send_index " is incremented because already received buffer is filled with 
         TOPAZ command */
     send_index = (uint8_t)(send_index + 1);
-    psNdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+    psNdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
 
     switch (*psNdefMap->SendRecvBuf)
 

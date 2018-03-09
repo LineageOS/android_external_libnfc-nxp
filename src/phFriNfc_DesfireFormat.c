@@ -691,8 +691,8 @@ static NFCSTATUS phFriNfc_Desf_HGetSWVersion(phFriNfc_sNdefSmtCrdFmt_t *NdefSmtC
     NFCSTATUS status = PHNFCSTVAL(CID_FRI_NFC_NDEF_SMTCRDFMT,
         NFCSTATUS_FORMAT_ERROR);
 
-    if( ( NdefSmtCrdFmt->SendRecvBuf[*(NdefSmtCrdFmt->SendRecvLength)- 1] == 
-                PH_FRINFC_DESF_PICC_ADDI_FRAME_RESP) )
+    if (NdefSmtCrdFmt->SendRecvBuf[*(NdefSmtCrdFmt->SendRecvLength)- 1] ==
+                PH_FRINFC_DESF_PICC_ADDI_FRAME_RESP)
     {
         /*set the state*/
         NdefSmtCrdFmt->State = PH_FRINFC_DESF_STATE_GET_SW_VERSION;
@@ -710,8 +710,8 @@ static NFCSTATUS phFriNfc_Desf_HUpdateVersionDetails(phFriNfc_sNdefSmtCrdFmt_t *
     NFCSTATUS status = PHNFCSTVAL(CID_NFC_NONE,
 				NFCSTATUS_SUCCESS);
 
-    if( ( NdefSmtCrdFmt->SendRecvBuf[*(NdefSmtCrdFmt->SendRecvLength)- 
-        PH_SMTCRDFMT_DESF_VAL1] ==  PH_FRINFC_DESF_PICC_ADDI_FRAME_RESP ) )
+    if (NdefSmtCrdFmt->SendRecvBuf[*(NdefSmtCrdFmt->SendRecvLength) -
+        PH_SMTCRDFMT_DESF_VAL1] ==  PH_FRINFC_DESF_PICC_ADDI_FRAME_RESP)
     {
         NdefSmtCrdFmt->AddInfo.Type4Info.MajorVersion = NdefSmtCrdFmt->SendRecvBuf[PH_SMTCRDFMT_DESF_VAL3];
         NdefSmtCrdFmt->AddInfo.Type4Info.MinorVersion = NdefSmtCrdFmt->SendRecvBuf[PH_SMTCRDFMT_DESF_VAL4];
@@ -779,8 +779,8 @@ static NFCSTATUS phFriNfc_Desf_HGetUIDDetails(phFriNfc_sNdefSmtCrdFmt_t * NdefSm
 {
 
     NFCSTATUS status = NFCSTATUS_PENDING;
-    if( ( NdefSmtCrdFmt->SendRecvBuf[*(NdefSmtCrdFmt->SendRecvLength)- 
-        PH_SMTCRDFMT_DESF_VAL1] ==  PH_FRINFC_DESF_PICC_ADDI_FRAME_RESP) )
+    if (NdefSmtCrdFmt->SendRecvBuf[*(NdefSmtCrdFmt->SendRecvLength) -
+        PH_SMTCRDFMT_DESF_VAL1] ==  PH_FRINFC_DESF_PICC_ADDI_FRAME_RESP)
     {
         /*set the state*/
         NdefSmtCrdFmt->State = PH_FRINFC_DESF_STATE_GET_UID;

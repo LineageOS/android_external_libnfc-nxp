@@ -290,7 +290,6 @@ PURPOSE:  DAL Shutdown function.
 NFCSTATUS phDal4Nfc_Shutdown( void *pContext, void *pHwRef)
 {
    NFCSTATUS result = NFCSTATUS_SUCCESS;
-   void * pThreadReturn;
 
 //   if (pContext == NULL)
 //      return NFCSTATUS_INVALID_PARAMETER;
@@ -536,8 +535,6 @@ NFCSTATUS phDal4Nfc_Config(pphDal4Nfc_sConfig_t config,void **phwref)
    NFCSTATUS                       retstatus = NFCSTATUS_SUCCESS;
    const hw_module_t* hw_module;
    nfc_pn544_device_t* pn544_dev;
-   uint8_t num_eeprom_settings;
-   uint8_t* eeprom_settings;
    int ret;
 
    /* Retrieve the hw module from the Android NFC HAL */
@@ -705,9 +702,6 @@ NFCSTATUS phDal4Nfc_Download()
 
 int phDal4Nfc_ReaderThread(void * pArg)
 {
-    char      retvalue;
-    NFCSTATUS result = NFCSTATUS_SUCCESS;
-    uint8_t   retry_cnt=0;
     void *    memsetRet;
 
     static int       MsgType= PHDAL4NFC_READ_MESSAGE;
@@ -715,7 +709,6 @@ int phDal4Nfc_ReaderThread(void * pArg)
 
     phDal4Nfc_Message_t      sMsg;
     phOsalNfc_Message_t      OsalMsg ;
-    int i;
     int i2c_error_count;
     int i2c_workaround;
     int i2c_device_address = 0x57;
@@ -833,8 +826,6 @@ retry:
  */
 NFCSTATUS phDal4Nfc_StartThreads(void)
 {
-    pthread_attr_t nReadThreadAttributes;
-    pthread_attr_t nWriteThreadAttributes;
     int ret;
 
     if(sem_init(&nfc_read_sem, 0, 0) == -1)
@@ -911,7 +902,6 @@ void phDal4Nfc_FillMsg(phDal4Nfc_Message_t *pDalMsg,phOsalNfc_Message_t *pOsalMs
 void phDal4Nfc_DeferredCb (void  *params)
 {
     int*    pParam=NULL;
-    int     i;
     phNfc_sTransactionInfo_t TransactionInfo;
 
     pParam=(int*)params;

@@ -76,14 +76,6 @@ STATIC void phLibNfc_RemoteDev_Connect_Cb(
                            NFCSTATUS    status
                            );
 
-#ifdef RECONNECT_SUPPORT
-STATIC 
-void 
-phLibNfc_config_discovery_con_failure_cb (
-    void                *context,
-    NFCSTATUS           status);
-#endif /* #ifdef RECONNECT_SUPPORT */
-
 /*Remote device disconnect response callback*/
 STATIC void phLibNfc_RemoteDev_Disconnect_cb(                        
                                 void                          *context,
@@ -321,15 +313,11 @@ void phLibNfc_NotificationRegister_Resp_Cb (
         gpphLibContext->dev_cnt = tag_disc_flg;
         /* Check for if the discovered tags are multiple or
          Multiple protocol tag */
-        if((gpphLibContext->dev_cnt > 1)&&(
-            (status ==NFCSTATUS_MULTIPLE_PROTOCOLS) ||
-            (status ==NFCSTATUS_MULTIPLE_TAGS)) )
+        if ((gpphLibContext->dev_cnt <= 1) ||
+            ((status != NFCSTATUS_MULTIPLE_PROTOCOLS) &&
+            (status != NFCSTATUS_MULTIPLE_TAGS)))
         {
-            status = status;
-        }
-        else
-        {
-            status =NFCSTATUS_SUCCESS;
+            status = NFCSTATUS_SUCCESS;
         }
         /*Notify to upper layer the no of tag discovered and
           the protocol */
@@ -658,75 +646,6 @@ NFCSTATUS phLibNfc_RemoteDev_Connect(
     return RetVal;
 }
 
-#ifdef RECONNECT_SUPPORT
-STATIC 
-void 
-phLibNfc_config_discovery_con_failure_cb (
-    void                *context,
-    NFCSTATUS           status)
-{
-    if((phLibNfc_LibContext_t *)context == gpphLibContext)      
-    {   /*check for same context*/
-        pphLibNfc_ConnectCallback_t    ps_client_con_cb = 
-                                    gpphLibContext->CBInfo.pClientConnectCb;
-
-        if(eLibNfcHalStateShutdown == gpphLibContext->LibNfcState.next_state)
-        {
-            /*If shutdown called in between allow shutdown to happen*/
-            phLibNfc_Pending_Shutdown();
-            status = NFCSTATUS_SHUTDOWN;
-        }
-        else
-        {
-            gpphLibContext->status.GenCb_pending_status = FALSE;
-            gpphLibContext->status.DiscEnbl_status = FALSE;
-            status = NFCSTATUS_TARGET_LOST;
-
-            phLibNfc_UpdateCurState (status,gpphLibContext);
-#ifdef RESTART_CFG
-            if(gpphLibContext->status.Discovery_pending_status == TRUE)
-            {
-                NFCSTATUS RetStatus = NFCSTATUS_FAILED;
-                /* Application has called discovery before receiving this callback,
-                so NO notification to the upper layer, instead lower layer
-                discovery is called */
-                gpphLibContext->status.Discovery_pending_status = FALSE;
-                RetStatus =  phHal4Nfc_ConfigureDiscovery(
-                        gpphLibContext->psHwReference,
-                        gpphLibContext->eLibNfcCfgMode,
-                        &gpphLibContext->sADDconfig,
-                        (pphLibNfc_RspCb_t)
-                        phLibNfc_config_discovery_cb,
-                        (void *)gpphLibContext);
-                if (NFCSTATUS_PENDING == RetStatus)
-                {
-                    (void)phLibNfc_UpdateNextState(gpphLibContext,
-                                            eLibNfcHalStateConfigReady);
-                    gpphLibContext->status.GenCb_pending_status = TRUE;
-                    gpphLibContext->status.DiscEnbl_status = TRUE;
-                }
-            }
-
-#endif /* #ifdef RESTART_CFG */
-        }
-
-        if (NULL != ps_client_con_cb)
-        {
-            gpphLibContext->CBInfo.pClientConnectCb = NULL;
-            /* Call the upper layer callback*/      
-            ps_client_con_cb (gpphLibContext->CBInfo.pClientConCntx,
-                            0, NULL, status);
-        }
-    } /*End of if-context check*/
-    else
-    {   /*exception: wrong context pointer returned*/
-        phOsalNfc_RaiseException(phOsalNfc_e_InternalErr,1);
-        status = NFCSTATUS_FAILED;
-    }
-
-    
-}
-#endif /* #ifdef RECONNECT_SUPPORT */
 /**
 * Response callback for remote device connect
 */

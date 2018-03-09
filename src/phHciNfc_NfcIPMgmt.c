@@ -1413,6 +1413,8 @@ phHciNfc_NfcIP_InfoUpdate(
                         case phNfc_eDataRate_424:
                             ALOGI("I'm P2P %s Initiator @ 424 kb/s", p_nfcipinfo->activation_mode ? "Active" : "Passive");
                             break;
+                        default:
+                            break;
                     }
                 }
                 p_nfcipinfo->target_speed = (phHciNfc_eP2PSpeed_t)
@@ -1427,6 +1429,8 @@ phHciNfc_NfcIP_InfoUpdate(
                             break;
                         case phNfc_eDataRate_424:
                             ALOGI("I'm P2P %s Target @ 424 kb/s", p_nfcipinfo->activation_mode ? "Active" : "Passive");
+                            break;
+                        default:
                             break;
                     }
                 }

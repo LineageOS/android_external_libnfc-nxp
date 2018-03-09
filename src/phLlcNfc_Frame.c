@@ -1230,7 +1230,7 @@ phLlcNfc_H_ProcessIFrame (
     /* Received buffer, N(S) value = N(R) of host (our 
         structure) then send RR type of s frame else send 
         REJ type of s frame */
-    if ((ns_index == ps_frame_info->n_r)
+    if (ns_index == ps_frame_info->n_r
 #if defined (LLC_SEND_RR_ACK)
 
         || ((ns_index < ps_frame_info->n_r) && 

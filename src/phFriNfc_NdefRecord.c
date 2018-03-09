@@ -46,6 +46,15 @@
 /* Harsha: To Fix: 0000358: phFriNfc_NdefRecord.h: includes should be moved */
 #include <string.h>
 
+static uint8_t phFriNfc_NdefRecord_TypeNameFormat ( uint8_t    *Record);
+static uint8_t phFriNfc_NdefRecord_RecordFlag ( uint8_t    *Record);
+static NFCSTATUS phFriNfc_NdefRecord_RecordIDCheck ( uint8_t       *Record,
+                                              uint8_t       *TypeLength,
+                                              uint8_t       *TypeLengthByte,
+                                              uint8_t       *PayloadLengthByte,
+                                              uint32_t      *PayloadLength,
+                                              uint8_t       *IDLengthByte,
+                                              uint8_t       *IDLength);
 
 /*!
  *

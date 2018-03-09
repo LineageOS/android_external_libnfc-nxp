@@ -3059,8 +3059,8 @@ static NFCSTATUS phFriNfc_MfUL_H_fillSendBufToWr(phFriNfc_NdefMap_t *NdefMap)
         if((NdefMap->TLVStruct.NdefTLVByte - PH_FRINFC_NDEFMAP_MFUL_VAL1) < 
         PH_FRINFC_NDEFMAP_MFUL_VAL3)
         {
-            if ((NdefMap->TLVStruct.NdefTLVSector == 
-                NdefMap->MifareULContainer.CurrentSector))
+            if (NdefMap->TLVStruct.NdefTLVSector ==
+                NdefMap->MifareULContainer.CurrentSector)
             {
                 if(NdefMap->MifareULContainer.CurrentBlock == 
                         NdefMap->TLVStruct.NdefTLVBlock)
@@ -3086,8 +3086,8 @@ static NFCSTATUS phFriNfc_MfUL_H_fillSendBufToWr(phFriNfc_NdefMap_t *NdefMap)
         }
         else
         {
-            if ((NdefMap->TLVStruct.NdefTLVSector == 
-                NdefMap->MifareULContainer.CurrentSector))
+            if (NdefMap->TLVStruct.NdefTLVSector ==
+                NdefMap->MifareULContainer.CurrentSector)
             {
                 if(NdefMap->MifareULContainer.CurrentBlock == 
                     (NdefMap->TLVStruct.NdefTLVBlock + 

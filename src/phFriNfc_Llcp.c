@@ -825,6 +825,7 @@ static NFCSTATUS phFriNfc_Llcp_HandleLinkPacket( phFriNfc_Llcp_t    *Llcp,
       default:
       {
          /* Error: invalid ptype field, dropping packet */
+         result = NFCSTATUS_FAILED;
          break;
       }
    }
@@ -839,7 +840,6 @@ static NFCSTATUS phFriNfc_Llcp_HandleTransportPacket( phFriNfc_Llcp_t    *Llcp,
    phFriNfc_Llcp_Recv_CB_t          pfRecvCB;
    void                             *pContext;
    NFCSTATUS                        result = NFCSTATUS_SUCCESS;
-   phFriNfc_Llcp_sPacketHeader_t    sHeader;
 
    /* Forward to upper layer */
    if (Llcp->pfRecvCB != NULL)
@@ -923,7 +923,6 @@ static bool_t phFriNfc_Llcp_HandlePendingSend ( phFriNfc_Llcp_t *Llcp )
       return_value = TRUE;
    }
 
-clean_and_return:
    if (bDeallocate)
    {
        phFriNfc_Llcp_Deallocate(psSendInfo);

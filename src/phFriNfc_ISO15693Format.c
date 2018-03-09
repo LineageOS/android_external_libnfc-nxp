@@ -544,8 +544,6 @@ phFriNfc_ISO15693_FmtProcess (
 {
     phFriNfc_sNdefSmtCrdFmt_t      *psNdefSmtCrdFmt = 
                                     (phFriNfc_sNdefSmtCrdFmt_t *)pContext;
-    phFriNfc_ISO15693_AddInfo_t     *ps_iso15693_info = 
-                                    &(psNdefSmtCrdFmt->AddInfo.s_iso15693_info);
 
     if((NFCSTATUS_SUCCESS & PHNFCSTBLOWER) == (Status & PHNFCSTBLOWER))
     {

@@ -2054,9 +2054,6 @@ phDnldNfc_Send_Raw(
         }
         case PHDNLD_CMD_WRITE:
         {
-			phDnldNfc_sRawDataHdr_t *raw_data_hdr =
-				( phDnldNfc_sRawDataHdr_t * ) (raw_frame + FRAME_HEADER_LEN);
-
             psDnldContext->resp_length = PHDNLD_MIN_PACKET;
 
             break;
@@ -2108,8 +2105,6 @@ phDnldNfc_Send_Raw(
             }
             else
             {
-			    phDnldNfc_sRawDataHdr_t *raw_data_hdr =
-				    ( phDnldNfc_sRawDataHdr_t * ) (raw_frame + FRAME_HEADER_LEN);
                 psDnldContext->resp_length = PHDNLD_MIN_PACKET;
             }
 
@@ -2179,32 +2174,6 @@ phDnldNfc_Send_Raw(
             psDnldContext->prev_dnld_size = frame_length;
         }
     }
-
-    return status;
-}
-
-
-static
-NFCSTATUS
-phDnldNfc_Frame_Complete(phDnldNfc_sContext_t *psDnldContext)
-{
-    NFCSTATUS               status = NFCSTATUS_SUCCESS;
-    phDnldNfc_sData_Hdr_t   *p_dnld_raw = NULL;
-    uint32_t                dnld_index = psDnldContext->dnld_index;
-    uint8_t                 *p_raw_sec_hdr = NULL;
-    uint16_t                tx_length = 0x00;
-
-    dnld_index = dnld_index + psDnldContext->prev_dnld_size;
-    p_raw_sec_hdr = psDnldContext->p_fw_raw + dnld_index;
-    dnld_index = dnld_index + *p_raw_sec_hdr;
-
-    p_dnld_raw = (phDnldNfc_sData_Hdr_t *) (psDnldContext->p_fw_raw +
-                                              psDnldContext->dnld_index);
-
-    tx_length = ((p_dnld_raw->frame_length[0] << BYTE_SIZE) |
-                            p_dnld_raw->frame_length[1]);
-
-    tx_length = tx_length + PHDNLD_MIN_PACKET;
 
     return status;
 }
@@ -3715,8 +3684,6 @@ phDnldNfc_Upgrade (
     phNfcIF_sCallBack_t     if_callback = { NULL, NULL, NULL, NULL };
     phNfc_sLowerIF_t        *plower_if = NULL;
     NFCSTATUS                status = NFCSTATUS_SUCCESS;
-    section_info_t          *p_cur_sec = NULL;
-    unsigned                sec_type = 0;
 
     if( (NULL == pHwRef)
       )

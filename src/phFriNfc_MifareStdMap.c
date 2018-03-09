@@ -3747,8 +3747,8 @@ static NFCSTATUS phFriNfc_MifStd_H_ChkTLVs(phFriNfc_NdefMap_t *NdefMap,
                             + PH_FRINFC_MIFARESTD_VAL2):
                             PH_FRINFC_MIFARESTD_VAL0);
 
-            if(( NdefMap->SendRecvBuf[TempLength] == 
-                        PH_FRINFC_MIFARESTD_VAL0))
+            if (NdefMap->SendRecvBuf[TempLength] ==
+                        PH_FRINFC_MIFARESTD_VAL0)
             {
                 Result = PHNFCSTVAL(CID_FRI_NFC_NDEF_MAP, 
                             NFCSTATUS_INVALID_PARAMETER);

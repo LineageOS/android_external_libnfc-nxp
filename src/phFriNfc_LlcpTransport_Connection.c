@@ -47,10 +47,6 @@ static void phFriNfc_LlcpTransport_ConnectionOriented_SendLlcp_CB(void*        p
 {
    phFriNfc_LlcpTransport_t          *psTransport;
    phFriNfc_LlcpTransport_Socket_t    psTempLlcpSocket;
-   phFriNfc_LlcpTransport_Socket_t   *psLocalLlcpSocket = NULL;
-   phNfc_sData_t                     sFrmrBuffer;
-   uint8_t                           index;
-   uint8_t                           socketFound = FALSE;
    NFCSTATUS                         result;
    /* Get Send CB context */
    psTransport = (phFriNfc_LlcpTransport_t*)pContext;
@@ -1609,7 +1605,6 @@ NFCSTATUS phFriNfc_LlcpTransport_ConnectionOriented_Listen(phFriNfc_LlcpTranspor
                                                            void*                                     pContext)
 {
    NFCSTATUS status = NFCSTATUS_SUCCESS;
-   uint8_t   index;
 
    /* Store the listen callback */
    pLlcpSocket->pfSocketListen_Cb = pListen_Cb;

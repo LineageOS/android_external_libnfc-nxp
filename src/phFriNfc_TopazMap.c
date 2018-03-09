@@ -277,7 +277,7 @@ NFCSTATUS phFriNfc_TopazMap_ChkNdef( phFriNfc_NdefMap_t     *NdefMap)
         NdefMap->PrevOperation = PH_FRINFC_NDEFMAP_CHECK_OPE;
 
 #ifdef TOPAZ_RAW_SUPPORT
-        NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;  
+        NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
         NdefMap->SendRecvBuf[PH_FRINFC_TOPAZ_VAL0] = PH_FRINFC_TOPAZ_CMD_READID;        
 #else        
 #ifdef PH_HAL4_ENABLE
@@ -361,7 +361,7 @@ NFCSTATUS phFriNfc_TopazMap_RdNdef( phFriNfc_NdefMap_t                  *NdefMap
             PH_FRINFC_TOPAZ_FLAG0;
         /* Topaz command = READALL */
 #ifdef TOPAZ_RAW_SUPPORT
-        NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+        NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
         NdefMap->SendRecvBuf[PH_FRINFC_TOPAZ_VAL0] = PH_FRINFC_TOPAZ_CMD_READALL;
 #else     
 
@@ -443,7 +443,7 @@ NFCSTATUS phFriNfc_TopazMap_WrNdef( phFriNfc_NdefMap_t     *NdefMap,
         /* Topaz command = READALL */
 
 #ifdef TOPAZ_RAW_SUPPORT
-        NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+        NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
         NdefMap->SendRecvBuf[PH_FRINFC_TOPAZ_VAL0] = PH_FRINFC_TOPAZ_CMD_READALL;
 #else
 #ifdef PH_HAL4_ENABLE
@@ -926,7 +926,7 @@ static NFCSTATUS phFriNfc_Tpz_H_RdBytes(phFriNfc_NdefMap_t *NdefMap,
 #endif /* #ifdef TOPAZ_RAW_SUPPORT */
 
 #ifdef TOPAZ_RAW_SUPPORT
-        NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+        NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
         /*Copy command to  Send Buffer*/
         NdefMap->SendRecvBuf[PH_FRINFC_TOPAZ_VAL0]  = PH_FRINFC_TOPAZ_CMD_READID;
         index ++;        
@@ -955,7 +955,7 @@ static NFCSTATUS phFriNfc_Tpz_H_RdBytes(phFriNfc_NdefMap_t *NdefMap,
 #endif /* #ifdef TOPAZ_RAW_SUPPORT */
 
 #ifdef TOPAZ_RAW_SUPPORT
-        NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+        NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
         /*Copy command to  Send Buffer*/
         NdefMap->SendRecvBuf[PH_FRINFC_TOPAZ_VAL0]  = PH_FRINFC_TOPAZ_CMD_READALL;
         index ++;
@@ -993,7 +993,7 @@ static NFCSTATUS phFriNfc_Tpz_H_RdBytes(phFriNfc_NdefMap_t *NdefMap,
 #endif /* #ifdef TOPAZ_RAW_SUPPORT */
 
 #ifdef TOPAZ_RAW_SUPPORT
-        NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+        NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
         /*Copy command to  Send Buffer*/
         NdefMap->SendRecvBuf[PH_FRINFC_TOPAZ_VAL0]  = PH_FRINFC_TOPAZ_CMD_READ;
         index ++;
@@ -1086,7 +1086,7 @@ static NFCSTATUS phFriNfc_Tpz_H_WrAByte(phFriNfc_NdefMap_t *NdefMap,
     *NdefMap->SendRecvLength = NdefMap->TempReceiveLength;
     /* Command used to write 1 byte */
 #ifdef TOPAZ_RAW_SUPPORT
-    NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+    NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
 #else
 #ifdef PH_HAL4_ENABLE
     NdefMap->Cmd.JewelCmd = phHal_eJewel_Write1E;
@@ -1170,7 +1170,7 @@ static NFCSTATUS phFriNfc_Tpz_H_ProReadID(phFriNfc_NdefMap_t *NdefMap)
         NdefMap->State = PH_FRINFC_TOPAZ_STATE_READALL;
         /* Topaz command = READALL */
 #ifdef TOPAZ_RAW_SUPPORT
-        NdefMap->Cmd.JewelCmd = phHal_eJewel_Raw;
+        NdefMap->Cmd.JewelCmd = (phNfc_eJewelCmdList_t)phHal_eJewel_Raw;
         NdefMap->SendRecvBuf[PH_FRINFC_TOPAZ_VAL0] = PH_FRINFC_TOPAZ_CMD_READALL;
 #else 
 #ifdef PH_HAL4_ENABLE

@@ -650,11 +650,7 @@ NFCSTATUS phLibNfc_SE_SetMode ( phLibNfc_Handle             hSE_Handle,
             pLibContext->sSeContext.sSeCallabackInfo.pSEsetModeCb = pSE_SetMode_Rsp_cb;
             pLibContext->sSeContext.sSeCallabackInfo.pSEsetModeCtxt=pContext;                       
         }
-        else if(Status == NFCSTATUS_INVALID_HANDLE)
-        {
-            Status= Status;
-        }
-        else
+        else if(Status != NFCSTATUS_INVALID_HANDLE)
         {
             // Restore original mode
             pLibContext->sSeContext.eActivatedMode = originalMode;

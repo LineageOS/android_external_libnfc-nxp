@@ -132,7 +132,6 @@ static void phFriNfc_LlcpTransport_Connectionless_SendTo_CB(void*        pContex
 {
    phFriNfc_LlcpTransport_Socket_t *         pLlcpSocket = (phFriNfc_LlcpTransport_Socket_t*)pContext;
    pphFriNfc_LlcpTransportSocketSendCb_t     pfSavedCallback;
-   void *                                    pSavedContext;
 
    /* Call the send callback */
    pfSavedCallback = pLlcpSocket->pfSocketSend_Cb;

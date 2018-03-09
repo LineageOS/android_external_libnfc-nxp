@@ -1449,7 +1449,6 @@ STATIC void phHal4Nfc_DownloadComplete(
     }
     else
     {
-        type = type;
         Hal4Ctxt = (phHal4Nfc_Hal4Ctxt_t *)pContext;
         /*Copy back stored context/callback for the upper layer*/
         pUpper_Context = Hal4Ctxt->sUpperLayerInfo.psUpperLayerCtxt;

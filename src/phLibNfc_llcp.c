@@ -71,7 +71,7 @@ STATIC NFCSTATUS static_CheckDevice(phLibNfc_Handle hRemoteDevice)
 {
    phLibNfc_sRemoteDevInformation_t*   psRemoteDevInfo = (phLibNfc_sRemoteDevInformation_t*)hRemoteDevice;
 
-   if (hRemoteDevice == NULL)
+   if (hRemoteDevice == 0)
    {
       return NFCSTATUS_INVALID_PARAMETER;
    }

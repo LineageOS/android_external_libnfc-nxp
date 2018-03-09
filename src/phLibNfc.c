@@ -338,7 +338,6 @@ STATIC void phLibNfc_DefaultHandler(
     }
     else
     {
-        info = info;
         if((NFC_EVENT_NOTIFICATION == type) &&
             (NFCSTATUS_BOARD_COMMUNICATION_ERROR == status))
         {

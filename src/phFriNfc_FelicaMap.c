@@ -767,7 +767,7 @@ static NFCSTATUS   phFriNfc_Felica_HSetTransceiveForRead(phFriNfc_NdefMap_t *Nde
    
     /* set the felica cmd */
 #ifdef PH_HAL4_ENABLE
-    NdefMap->Cmd.FelCmd = phHal_eFelica_Raw;
+    NdefMap->Cmd.FelCmd = (phNfc_eFelicaCmdList_t)phHal_eFelica_Raw;
 #else
     NdefMap->Cmd.FelCmd = phHal_eFelicaCmdListFelicaCmd;
 #endif /* #ifdef PH_HAL4_ENABLE */
@@ -977,7 +977,7 @@ static NFCSTATUS  phFriNfc_Felica_HUpdateAttrBlkForWrOp(phFriNfc_NdefMap_t *Ndef
 
         /* Set the Felica Cmd*/
 #ifdef PH_HAL4_ENABLE
-        NdefMap->Cmd.FelCmd = phHal_eFelica_Raw;
+        NdefMap->Cmd.FelCmd = (phNfc_eFelicaCmdList_t)phHal_eFelica_Raw;
 #else
         NdefMap->Cmd.FelCmd = phHal_eFelicaCmdListFelicaCmd;
 #endif  /* #ifdef PH_HAL4_ENABLE */
@@ -1175,7 +1175,7 @@ static NFCSTATUS  phFriNfc_Felica_HWrEmptyMsg(phFriNfc_NdefMap_t *NdefMap)
 
     /* Set the Felica Cmd*/
 #ifdef PH_HAL4_ENABLE
-    NdefMap->Cmd.FelCmd = phHal_eFelica_Raw;
+    NdefMap->Cmd.FelCmd = (phNfc_eFelicaCmdList_t)phHal_eFelica_Raw;
 #else
     NdefMap->Cmd.FelCmd = phHal_eFelicaCmdListFelicaCmd;
 #endif  /* #ifdef PH_HAL4_ENABLE */
@@ -2095,7 +2095,7 @@ static NFCSTATUS phFriNfc_Felica_HWriteDataBlk(phFriNfc_NdefMap_t *NdefMap)
 
     /*Set the ISO14434 command*/
 #ifdef PH_HAL4_ENABLE
-    NdefMap->Cmd.FelCmd = phHal_eFelica_Raw;    
+    NdefMap->Cmd.FelCmd = (phNfc_eFelicaCmdList_t)phHal_eFelica_Raw;
 #else
     NdefMap->Cmd.FelCmd = phHal_eFelicaCmdListFelicaCmd;
 #endif  /* #ifdef PH_HAL4_ENABLE */
@@ -2167,7 +2167,7 @@ static NFCSTATUS   phFriNfc_Felica_HPollCard(  phFriNfc_NdefMap_t     *NdefMap,
     NdefMap->State = state;
 
     /* set the felica cmd */
-    NdefMap->Cmd.FelCmd = phHal_eFelica_Raw;
+    NdefMap->Cmd.FelCmd = (phNfc_eFelicaCmdList_t)phHal_eFelica_Raw;
 
     /*set the additional informations for the data exchange*/
     NdefMap->psDepAdditionalInfo.DepFlags.MetaChaining = 0;
@@ -2246,7 +2246,7 @@ static NFCSTATUS   phFriNfc_Felica_HUpdateManufIdDetails(const phFriNfc_NdefMap_
     NFCSTATUS status = NFCSTATUS_PENDING;
 
     /* Get the details from Poll Response packet */
-    if (NdefMap->SendRecvLength >= 20)
+    if (NdefMap->SendRecvLength >= (uint16_t*)20)
     {
         (void)memcpy(  (uint8_t *)NdefMap->psRemoteDevInfo->RemoteDevInfo.Felica_Info.IDm,
                        (uint8_t *)&NdefMap->SendRecvBuf[2], 8);
@@ -2730,7 +2730,7 @@ static NFCSTATUS   phFriNfc_Felica_HRdAttrInfo(phFriNfc_NdefMap_t *NdefMap)
 
     /* Set the Felica Cmd*/
 #ifdef PH_HAL4_ENABLE
-    NdefMap->Cmd.FelCmd = phHal_eFelica_Raw;
+    NdefMap->Cmd.FelCmd = (phNfc_eFelicaCmdList_t)phHal_eFelica_Raw;
 #else
     NdefMap->Cmd.FelCmd = phHal_eFelicaCmdListFelicaCmd;
 #endif  /* #ifdef PH_HAL4_ENABLE */

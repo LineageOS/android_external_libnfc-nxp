@@ -332,11 +332,6 @@ static void phFriNfc_OvrHal_CB_Transceive(void *context,
                *OvrHal->pndef_recv_length = (uint16_t) pRecvdata->length;
             }
         }
-        if(NULL != RemoteDevHandle)
-        {   
-            /* Fix for Warning 4100 */
-            RemoteDevHandle=RemoteDevHandle;
-        }
 
         if (NULL != OvrHal->TemporaryCompletionInfo.CompletionRoutine)
         {
@@ -397,16 +392,11 @@ static void phFriNfc_OvrHal_CB_ConnectDisconnect(void *context,
     
     if (NULL != OvrHal)
     {
-        if (RemoteDevHandle != NULL)
-        {
-            /* Fix for Warning 4100 */
-            RemoteDevHandle = RemoteDevHandle;
-        }
-        else
+        if (RemoteDevHandle == NULL)
         {
             status = NFCSTATUS_FAILED;
         }
-        
+
         OvrHal->TemporaryCompletionInfo.CompletionRoutine(
                 OvrHal->TemporaryCompletionInfo.Context, status);
     }
